@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import { SignupForm } from "./signup/components/signup-form";
 import * as serviceWorker from "./serviceWorker";
 
