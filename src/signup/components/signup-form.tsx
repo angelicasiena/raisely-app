@@ -2,6 +2,11 @@ import React from "react";
 import { Formik } from "formik";
 import { signupService } from "../service/signup.service";
 
+type SignupResponse = {
+  message: string;
+  status: string;
+};
+
 export const SignupForm = () => (
   <div>
     <h1>My Form</h1>
@@ -9,11 +14,8 @@ export const SignupForm = () => (
       initialValues={{ firstname: "", lastname: "", email: "", password: "" }}
       onSubmit={async (values, actions) => {
         signupService.submit(values).then(function (response) {
-          if (response === "ACTIVE") {
-            alert("Thank you for signing up!");
-          } else {
-              alert("Cannot signup at the moment!");
-          }
+          response = response as SignupResponse;
+          alert(response.message);
         });
         actions.setSubmitting(false);
       }}

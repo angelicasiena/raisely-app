@@ -6,21 +6,32 @@ type SignupFormParams = {
   email: string;
   password: string;
 };
+
+type SignupResponse = {
+  message: string;
+  status: string;
+};
+
 const CAMPAIGNUUID = "46aa3270-d2ee-11ea-a9f0-e9a68ccff42a";
 
 class SignupService {
-  public submit(data: SignupFormParams): Promise<string> {
+  public submit(data: SignupFormParams): Promise<SignupResponse> {
     return axios
       .post(`https://api.raisely.com/v3/signup`, {
         campaignUuid: CAMPAIGNUUID,
         data,
       })
       .then(function (response) {
-        return response.data.status;
+        return {
+          message: response.data.message,
+          status: response.data.data.status,
+        } as SignupResponse;
       })
       .catch(function (error) {
-        console.error(error);
-        return "TRY AGAIN LATER...";
+        return {
+          message: error?.response?.data?.errors[0]?.message,
+          status: error?.response?.data?.errors[0]?.status,
+        };
       });
   }
 
