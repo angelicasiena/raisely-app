@@ -3,14 +3,14 @@ import { Formik } from "formik";
 import { signupService } from "../service/signup.service";
 import { SignupMessage } from "../../types";
 import { MessageBox } from "../../message/message";
-import { Box, Input, Label } from "../../styled-tags/index";
+import { Box, Button, Flex, Input, Label } from "../../styled-tags/index";
 
 export const SignupForm: React.FC = () => {
   const [messageData, setMessageData] = React.useState<SignupMessage | null>(
     null
   );
   return (
-    <div>
+    <Box width="300px" m="auto">
       <h1>Signup Form</h1>
       {messageData && (
         <MessageBox message={messageData.message} status={messageData.status} />
@@ -38,7 +38,7 @@ export const SignupForm: React.FC = () => {
       >
         {(props) => (
           <form onSubmit={props.handleSubmit}>
-            <Box>
+            <Flex>
               <Label>Firstname:</Label>
               <Input
                 type="text"
@@ -46,12 +46,13 @@ export const SignupForm: React.FC = () => {
                 onBlur={props.handleBlur}
                 value={props.values.firstname}
                 name="firstname"
+                required
               />
               {props.errors.firstname && (
                 <div id="feedback">{props.errors.firstname}</div>
               )}
-            </Box>
-            <Box>
+            </Flex>
+            <Flex>
               <Label>Lastname:</Label>
               <Input
                 type="text"
@@ -59,12 +60,13 @@ export const SignupForm: React.FC = () => {
                 onBlur={props.handleBlur}
                 value={props.values.lastname}
                 name="lastname"
+                required
               />
               {props.errors.lastname && (
                 <div id="feedback">{props.errors.lastname}</div>
               )}
-            </Box>
-            <Box>
+            </Flex>
+            <Flex>
               <Label>Email:</Label>
               <Input
                 type="email"
@@ -72,12 +74,13 @@ export const SignupForm: React.FC = () => {
                 onBlur={props.handleBlur}
                 value={props.values.email}
                 name="email"
+                required
               />
               {props.errors.email && (
                 <div id="feedback">{props.errors.email}</div>
               )}
-            </Box>
-            <Box>
+            </Flex>
+            <Flex>
               <Label>Password:</Label>
               <Input
                 type="password"
@@ -85,15 +88,25 @@ export const SignupForm: React.FC = () => {
                 onBlur={props.handleBlur}
                 value={props.values.password}
                 name="password"
+                required
               />
               {props.errors.password && (
                 <div id="feedback">{props.errors.password}</div>
               )}
-            </Box>
-            <button type="submit">Submit</button>
+            </Flex>
+            <Flex mt="25px">
+              <Button
+                bg="#2196F3"
+                borderColor="#2196F3"
+                color="#FFFFFF"
+                type="submit"
+              >
+                SIGNUP
+              </Button>
+            </Flex>
           </form>
         )}
       </Formik>
-    </div>
+    </Box>
   );
 };

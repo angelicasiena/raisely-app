@@ -17,7 +17,7 @@ export const MessageBox: React.FC<SignupMessage> = (
   messageData: SignupMessage
 ) => {
   return (
-    <Box
+    <Box p={2}
       bg={colors[messageData.status]?.backgroundColor}
       color={colors[messageData.status]?.color}
     >

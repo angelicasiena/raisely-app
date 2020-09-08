@@ -1,6 +1,14 @@
 import styled from "styled-components";
-import { color, BackgroundColorProps } from "styled-system";
+import {
+  compose,
+  color,
+  layout,
+  space,
+  BackgroundColorProps,
+  LayoutProps,
+  SpaceProps,
+} from "styled-system";
 
-export const Box = styled.div<BackgroundColorProps>`
-  ${color}
-`;
+export const Box = styled.div<BackgroundColorProps | LayoutProps | SpaceProps>(
+  compose(color, layout, space)
+);
