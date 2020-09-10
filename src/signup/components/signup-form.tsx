@@ -1,22 +1,27 @@
 import React from "react";
-import { Formik, Field } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as EmailValidator from "email-validator";
 import { signupService } from "../service/signup.service";
 import { SignupMessage } from "../../types";
 import { MessageBox } from "../../message/message";
-import { Box, Button, Flex, Input, Label } from "../../styled-tags/index";
+import { Box, SubmitButton, Flex, Input, Label } from "../../styled-tags/index";
 
 export const SignupForm: React.FC = () => {
   const [messageData, setMessageData] = React.useState<SignupMessage | null>(
     null
   );
 
+  const emailAlreadyExists = async (email: string) => {
+    const emailCheckerResponse = await signupService.emailChecker(email);
+    return emailCheckerResponse?.toLowerCase() !== "ok";
+  };
+
   const validateEmail = async (email: string) => {
-    const emailAlreadyExists = await signupService.emailChecker(email);
+    const isExisting = await emailAlreadyExists(email);
     if (!EmailValidator.validate(email)) {
       return "Invalid Email";
-    } else if (emailAlreadyExists) {
-      return "Email already exists";
+    } else {
+      return isExisting ? "Email already exists" : null;
     }
   };
   return (
@@ -26,12 +31,12 @@ export const SignupForm: React.FC = () => {
         <MessageBox message={messageData.message} status={messageData.status} />
       )}
       <Formik
+        validateOnBlur={false}
+        validateOnChange={false}
         initialValues={{ firstname: "", lastname: "", email: "", password: "" }}
         onSubmit={async (values, actions) => {
-          const emailAlreadyExists = await signupService.emailChecker(
-            values.email
-          );
-          if (emailAlreadyExists.toLowerCase() === "ok") {
+          const isExisting = await emailAlreadyExists(values.email);
+          if (!isExisting) {
             signupService.submit(values).then(function (response) {
               setMessageData(response);
             });
@@ -46,21 +51,28 @@ export const SignupForm: React.FC = () => {
           actions.setSubmitting(false);
         }}
       >
-        {(props) => (
-          <form onSubmit={props.handleSubmit}>
+        {({
+          values,
+          validateField,
+          handleSubmit,
+          handleChange,
+          errors,
+          isSubmitting
+        }) => (
+          <Form onSubmit={handleSubmit}>
             <Flex>
               <Label>Firstname:</Label>
               <Field
                 as={Input}
                 type="text"
-                value={props.values.firstname}
+                value={values.firstname}
                 name="firstname"
                 required
               />
-              {props.errors.firstname && (
+              {errors.firstname && (
                 <Box mt={2}>
-                <MessageBox message={props.errors.firstname} status="error" />
-              </Box>
+                  <MessageBox message={errors.firstname} status="error" />
+                </Box>
               )}
             </Flex>
             <Flex>
@@ -68,15 +80,14 @@ export const SignupForm: React.FC = () => {
               <Field
                 as={Input}
                 type="text"
-                onChange={props.handleChange}
-                value={props.values.lastname}
+                value={values.lastname}
                 name="lastname"
                 required
               />
-              {props.errors.lastname && (
+              {errors.lastname && (
                 <Box mt={2}>
-                <MessageBox message={props.errors.lastname} status="error" />
-              </Box>
+                  <MessageBox message={errors.lastname} status="error" />
+                </Box>
               )}
             </Flex>
             <Flex>
@@ -84,19 +95,21 @@ export const SignupForm: React.FC = () => {
               <Field
                 as={Input}
                 type="email"
-                onBlur={() => props.validateField("email")}
+                onBlur={(event: React.FocusEvent<any>) => {
+                  validateField("email");
+                }}
                 validate={() => {
-                  if (props.values.email) {
-                    return validateEmail(props.values.email);
+                  if (values.email) {
+                    return validateEmail(values.email);
                   }
                 }}
-                value={props.values.email}
+                value={values.email}
                 name="email"
                 required
               />
-              {props.errors.email && (
+              {errors.email && (
                 <Box mt={2}>
-                  <MessageBox message={props.errors.email} status="error" />
+                  <MessageBox message={errors.email} status="error" />
                 </Box>
               )}
             </Flex>
@@ -105,29 +118,28 @@ export const SignupForm: React.FC = () => {
               <Field
                 as={Input}
                 type="password"
-                onChange={props.handleChange}
-                value={props.values.password}
+                value={values.password}
                 name="password"
                 required
               />
-              {props.errors.password && (
+              {errors.password && (
                 <Box mt={2}>
-                <MessageBox message={props.errors.password} status="error" />
-              </Box>
+                  <MessageBox message={errors.password} status="error" />
+                </Box>
               )}
             </Flex>
             <Flex mt="25px">
-              <Button
+              <SubmitButton
                 bg="#2196F3"
                 borderColor="#2196F3"
                 color="#FFFFFF"
                 type="submit"
-                disabled={props.isSubmitting || !props.isValid || !props.dirty}
+                disabled={isSubmitting}
               >
                 SIGNUP
-              </Button>
+              </SubmitButton>
             </Flex>
-          </form>
+          </Form>
         )}
       </Formik>
     </Box>
