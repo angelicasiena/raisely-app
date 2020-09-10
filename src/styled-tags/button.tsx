@@ -13,6 +13,7 @@ export const Button = styled.button<
   BackgroundColorProps | BorderProps | SpaceProps
 >(
   {
+    cursor: "pointer",
     width: "100%",
     padding: "10px",
     borderStyle: "none",

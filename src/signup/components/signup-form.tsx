@@ -50,20 +50,23 @@ export const SignupForm: React.FC = () => {
           <form onSubmit={props.handleSubmit}>
             <Flex>
               <Label>Firstname:</Label>
-              <Input
+              <Field
+                as={Input}
                 type="text"
-                onChange={props.handleChange}
                 value={props.values.firstname}
                 name="firstname"
                 required
               />
               {props.errors.firstname && (
-                <div id="feedback">{props.errors.firstname}</div>
+                <Box mt={2}>
+                <MessageBox message={props.errors.firstname} status="error" />
+              </Box>
               )}
             </Flex>
             <Flex>
               <Label>Lastname:</Label>
-              <Input
+              <Field
+                as={Input}
                 type="text"
                 onChange={props.handleChange}
                 value={props.values.lastname}
@@ -71,14 +74,16 @@ export const SignupForm: React.FC = () => {
                 required
               />
               {props.errors.lastname && (
-                <div id="feedback">{props.errors.lastname}</div>
+                <Box mt={2}>
+                <MessageBox message={props.errors.lastname} status="error" />
+              </Box>
               )}
             </Flex>
             <Flex>
               <Label>Email:</Label>
               <Field
+                as={Input}
                 type="email"
-                onChange={props.handleChange}
                 onBlur={() => props.validateField("email")}
                 validate={() => {
                   if (props.values.email) {
@@ -97,7 +102,8 @@ export const SignupForm: React.FC = () => {
             </Flex>
             <Flex>
               <Label>Password:</Label>
-              <Input
+              <Field
+                as={Input}
                 type="password"
                 onChange={props.handleChange}
                 value={props.values.password}
@@ -105,7 +111,9 @@ export const SignupForm: React.FC = () => {
                 required
               />
               {props.errors.password && (
-                <div id="feedback">{props.errors.password}</div>
+                <Box mt={2}>
+                <MessageBox message={props.errors.password} status="error" />
+              </Box>
               )}
             </Flex>
             <Flex mt="25px">
@@ -114,6 +122,7 @@ export const SignupForm: React.FC = () => {
                 borderColor="#2196F3"
                 color="#FFFFFF"
                 type="submit"
+                disabled={props.isSubmitting || !props.isValid || !props.dirty}
               >
                 SIGNUP
               </Button>
