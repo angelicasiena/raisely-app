@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/raisely-app/static/js/main.366b6d0f.chunk.js",
-    "main.js.map": "/raisely-app/static/js/main.366b6d0f.chunk.js.map",
+    "main.js": "/raisely-app/static/js/main.da2f4282.chunk.js",
+    "main.js.map": "/raisely-app/static/js/main.da2f4282.chunk.js.map",
     "runtime-main.js": "/raisely-app/static/js/runtime-main.9c146da3.js",
     "runtime-main.js.map": "/raisely-app/static/js/runtime-main.9c146da3.js.map",
-    "static/js/2.7d24c4c0.chunk.js": "/raisely-app/static/js/2.7d24c4c0.chunk.js",
-    "static/js/2.7d24c4c0.chunk.js.map": "/raisely-app/static/js/2.7d24c4c0.chunk.js.map",
+    "static/js/2.11973187.chunk.js": "/raisely-app/static/js/2.11973187.chunk.js",
+    "static/js/2.11973187.chunk.js.map": "/raisely-app/static/js/2.11973187.chunk.js.map",
     "index.html": "/raisely-app/index.html",
-    "precache-manifest.a093127b52e8ffdd5ae80b05ba6d11b0.js": "/raisely-app/precache-manifest.a093127b52e8ffdd5ae80b05ba6d11b0.js",
+    "precache-manifest.4d121e703b6d888cb7c5bd1bc6a50daa.js": "/raisely-app/precache-manifest.4d121e703b6d888cb7c5bd1bc6a50daa.js",
     "service-worker.js": "/raisely-app/service-worker.js",
-    "static/js/2.7d24c4c0.chunk.js.LICENSE.txt": "/raisely-app/static/js/2.7d24c4c0.chunk.js.LICENSE.txt"
+    "static/js/2.11973187.chunk.js.LICENSE.txt": "/raisely-app/static/js/2.11973187.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.9c146da3.js",
-    "static/js/2.7d24c4c0.chunk.js",
-    "static/js/main.366b6d0f.chunk.js"
+    "static/js/2.11973187.chunk.js",
+    "static/js/main.da2f4282.chunk.js"
   ]
 }
