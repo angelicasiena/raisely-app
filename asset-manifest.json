@@ -1,23 +1,19 @@
 {
   "files": {
-    "main.css": "/raisely-app/static/css/main.5f361e03.chunk.css",
-    "main.js": "/raisely-app/static/js/main.7b537efa.chunk.js",
-    "main.js.map": "/raisely-app/static/js/main.7b537efa.chunk.js.map",
+    "main.js": "/raisely-app/static/js/main.326d8550.chunk.js",
+    "main.js.map": "/raisely-app/static/js/main.326d8550.chunk.js.map",
     "runtime-main.js": "/raisely-app/static/js/runtime-main.9c146da3.js",
     "runtime-main.js.map": "/raisely-app/static/js/runtime-main.9c146da3.js.map",
-    "static/js/2.67c31cd0.chunk.js": "/raisely-app/static/js/2.67c31cd0.chunk.js",
-    "static/js/2.67c31cd0.chunk.js.map": "/raisely-app/static/js/2.67c31cd0.chunk.js.map",
+    "static/js/2.7a09da42.chunk.js": "/raisely-app/static/js/2.7a09da42.chunk.js",
+    "static/js/2.7a09da42.chunk.js.map": "/raisely-app/static/js/2.7a09da42.chunk.js.map",
     "index.html": "/raisely-app/index.html",
-    "precache-manifest.a35434354445de35c957c89399265480.js": "/raisely-app/precache-manifest.a35434354445de35c957c89399265480.js",
+    "precache-manifest.6b71fae5bd72a240b2fa7bf8b5fa4225.js": "/raisely-app/precache-manifest.6b71fae5bd72a240b2fa7bf8b5fa4225.js",
     "service-worker.js": "/raisely-app/service-worker.js",
-    "static/css/main.5f361e03.chunk.css.map": "/raisely-app/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.67c31cd0.chunk.js.LICENSE.txt": "/raisely-app/static/js/2.67c31cd0.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "/raisely-app/static/media/logo.5d5d9eef.svg"
+    "static/js/2.7a09da42.chunk.js.LICENSE.txt": "/raisely-app/static/js/2.7a09da42.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.9c146da3.js",
-    "static/js/2.67c31cd0.chunk.js",
-    "static/css/main.5f361e03.chunk.css",
-    "static/js/main.7b537efa.chunk.js"
+    "static/js/2.7a09da42.chunk.js",
+    "static/js/main.326d8550.chunk.js"
   ]
 }
