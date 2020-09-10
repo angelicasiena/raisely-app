@@ -1,5 +1,6 @@
 import React from "react";
-import { Formik } from "formik";
+import { Formik, Field } from "formik";
+import * as EmailValidator from "email-validator";
 import { signupService } from "../service/signup.service";
 import { SignupMessage } from "../../types";
 import { MessageBox } from "../../message/message";
@@ -9,6 +10,15 @@ export const SignupForm: React.FC = () => {
   const [messageData, setMessageData] = React.useState<SignupMessage | null>(
     null
   );
+
+  const validateEmail = async (email: string) => {
+    const emailAlreadyExists = await signupService.emailChecker(email);
+    if (!EmailValidator.validate(email)) {
+      return "Invalid Email";
+    } else if (emailAlreadyExists) {
+      return "Email already exists";
+    }
+  };
   return (
     <Box width="300px" m="auto">
       <h1>Signup Form</h1>
@@ -43,7 +53,6 @@ export const SignupForm: React.FC = () => {
               <Input
                 type="text"
                 onChange={props.handleChange}
-                onBlur={props.handleBlur}
                 value={props.values.firstname}
                 name="firstname"
                 required
@@ -57,7 +66,6 @@ export const SignupForm: React.FC = () => {
               <Input
                 type="text"
                 onChange={props.handleChange}
-                onBlur={props.handleBlur}
                 value={props.values.lastname}
                 name="lastname"
                 required
@@ -68,16 +76,23 @@ export const SignupForm: React.FC = () => {
             </Flex>
             <Flex>
               <Label>Email:</Label>
-              <Input
+              <Field
                 type="email"
                 onChange={props.handleChange}
-                onBlur={props.handleBlur}
+                onBlur={() => props.validateField("email")}
+                validate={() => {
+                  if (props.values.email) {
+                    return validateEmail(props.values.email);
+                  }
+                }}
                 value={props.values.email}
                 name="email"
                 required
               />
               {props.errors.email && (
-                <div id="feedback">{props.errors.email}</div>
+                <Box mt={2}>
+                  <MessageBox message={props.errors.email} status="error" />
+                </Box>
               )}
             </Flex>
             <Flex>
@@ -85,7 +100,6 @@ export const SignupForm: React.FC = () => {
               <Input
                 type="password"
                 onChange={props.handleChange}
-                onBlur={props.handleBlur}
                 value={props.values.password}
                 name="password"
                 required
