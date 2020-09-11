@@ -16,8 +16,17 @@ export const SignupForm: React.FC = () => {
     return emailCheckerResponse?.toLowerCase() !== "ok";
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
   const validateEmail = async (email: string) => {
     const isExisting = await emailAlreadyExists(email);
+    setMessageData(null);
     if (!EmailValidator.validate(email)) {
       return "Invalid Email";
     } else {
@@ -36,9 +45,12 @@ export const SignupForm: React.FC = () => {
         initialValues={{ firstname: "", lastname: "", email: "", password: "" }}
         onSubmit={async (values, actions) => {
           const isExisting = await emailAlreadyExists(values.email);
+
+          setMessageData(null);
           if (!isExisting) {
             signupService.submit(values).then(function (response) {
               setMessageData(response);
+              scrollToTop();
             });
           } else {
             setMessageData({
@@ -46,6 +58,7 @@ export const SignupForm: React.FC = () => {
                 "This email address has already been registered. Have you tried logging in?",
               status: "error",
             });
+            scrollToTop();
           }
 
           actions.setSubmitting(false);
@@ -55,9 +68,9 @@ export const SignupForm: React.FC = () => {
           values,
           validateField,
           handleSubmit,
-          handleChange,
           errors,
-          isSubmitting
+          isSubmitting,
+          isValidating,
         }) => (
           <Form onSubmit={handleSubmit}>
             <Flex>
@@ -134,7 +147,7 @@ export const SignupForm: React.FC = () => {
                 borderColor="#2196F3"
                 color="#FFFFFF"
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || isValidating}
               >
                 SIGNUP
               </SubmitButton>
